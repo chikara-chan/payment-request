@@ -1728,6 +1728,8 @@
           dictionary PaymentDetailsUpdate : PaymentDetailsBase {
             DOMString error;
             PaymentItem total;
+            AddressErrors shippingAddressErrors;
+            PayerErrors payerErrors;
           };
         </pre>
         <p>
@@ -1771,8 +1773,65 @@
               "PaymentCurrencyAmount.value">value</a> is a negative number.
             </p>
           </dd>
+          <dt>
+            <dfn>shippingAddressErrors</dfn> member
+          </dt>
+          <dd>
+            If the event target has an associated shipping address, the member
+            represents validation errors associated with that shipping address.
+          </dd>
+          <dt>
+            <dfn>payerErrors</dfn> member
+          </dt>
+          <dd>
+            If the event target has associated <a>payer details</a>, the member
+            represents validation errors associated with particular payer
+            details.
+          </dd>
         </dl>
       </section>
+    </section>
+    <section>
+      <h2>
+        <dfn>PayerErrors</dfn> dictionary
+      </h2>
+      <pre class="idl">
+        dictionary PayerErrors {
+          DOMString emailError;
+          DOMString nameError;
+          DOMString phoneError;
+        };
+      </pre>
+      <p>
+        The <a>PayerErrors</a> is used to represent validation errors with one
+        ore more <a>payer details</a>.
+      </p>
+      <dl>
+        <dt>
+          <dfn>emailError</dfn> member
+        </dt>
+        <dd>
+          Describes an input error with the user-provided email.
+        </dd>
+        <dt>
+          <dfn>nameError</dfn> member
+        </dt>
+        <dd>
+          Describes an input error with the user-provided name.
+        </dd>
+        <dt>
+          <dfn>phoneError</dfn> member
+        </dt>
+        <dd>
+          Describes an input user-provided phone number.
+        </dd>
+      </dl>
+      <pre class="example js">
+        const payerErrors = {
+          email: "The domain name is invalid",
+          phone: "Invalid format",
+        };
+      </pre>
     </section>
     <section data-dfn-for="PaymentDetailsModifier" data-link-for=
     "PaymentDetailsModifier">
@@ -2716,6 +2775,118 @@
           <dd>
             A <a>phone number</a>, optionally structured to adhere to
             [[!E.164]].
+          </dd>
+        </dl>
+      </section>
+      <section data-dfn-for="AddressErrors" data-link-for="AddressErrors">
+        <h2>
+          <dfn>AddressErrors</dfn> dictionary
+        </h2>
+        <pre class="idl">
+          dictionary AddressErrors {
+            DOMString addressLineError;
+            DOMString cityError;
+            DOMString countryError;
+            DOMString dependentLocalityError;
+            DOMString languageCodeError;
+            DOMString organizationError;
+            DOMString phoneError;
+            DOMString postalCodeError;
+            DOMString recipientError;
+            DOMString regionError;
+            DOMString regionCodeError;
+            DOMString sortingCodeError;
+          };
+        </pre>
+        <p>
+          The <a>AddressErrors</a> dictionary's members are used by developers
+          to one or more validation error with specific value of a <a>physical
+          address</a>. Each dictionary member has a dual function: firstly, it
+          denotes there is a validation error the merchant would like the end
+          user to correct. Secondly, it provides the merchant with the
+          opportunity to describe to the end user what is wrong with a
+          particular value. As such, the user agent SHOULD present these errors
+          to the end user. However, a user agent MAY ignore dictionary members
+          for validation errors that the end user can't directly correct.
+        </p>
+        <p>
+          Merchants need to be aware that users might not have control over
+          certain parts of an address. As such, they need to be mindful to not
+          to ask the user to fix things they might not have control over (e.g.,
+          <a>regionCodeError</a> and <a>languageCodeError</a>).
+        </p>
+        <dl>
+          <dt>
+            <dfn>addressLineError</dfn> member
+          </dt>
+          <dd>
+            The <a>address line</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>cityError</dfn> member
+          </dt>
+          <dd>
+            The <a>city</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>countryError</dfn> member
+          </dt>
+          <dd>
+            The <a>country</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>dependentLocalityError</dfn> member
+          </dt>
+          <dd>
+            The <a>dependent locality</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>languageCodeError</dfn> member
+          </dt>
+          <dd>
+            The <a>language code</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>organizationError</dfn> member
+          </dt>
+          <dd>
+            The <a>organization</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>phoneError</dfn> member
+          </dt>
+          <dd>
+            The <a>phone number</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>postalCodeError</dfn> member
+          </dt>
+          <dd>
+            The <a>postal code</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>recipientError</dfn> member
+          </dt>
+          <dd>
+            The <a>recipient</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>regionError</dfn> member
+          </dt>
+          <dd>
+            The <a>region</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>regionCodeError</dfn> member
+          </dt>
+          <dd>
+            The <a>region code</a> has a validation error.
+          </dd>
+          <dt>
+            <dfn>sortingCodeError</dfn> member
+          </dt>
+          <dd>
+            The <a>sorting code</a> has a validation error.
           </dd>
         </dl>
       </section>

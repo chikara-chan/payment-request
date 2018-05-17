@@ -1810,7 +1810,7 @@
           </dt>
           <dd>
             Represents validation errors with the shipping address that is
-            associated with the <a data-cite="!dom#event-target">event
+            associated with the <a data-cite="!DOM#event-target">event
             target</a>.
           </dd>
         </dl>
@@ -2097,7 +2097,7 @@
         Physical addresses
       </h2>
       <p>
-        A <dfn>physical address</dfn> is composed of the following concepts.
+        A <dfn>physical address</dfn> is composed of the following parts.
       </p>
       <dl data-sort="">
         <dt>
@@ -2783,96 +2783,127 @@
           };
         </pre>
         <p>
-          The <a>AddressErrorFields</a> dictionary's members represent
+          The members of the <a>AddressErrorFields</a> dictionary represent
           validation errors with specific parts of a <a>physical address</a>.
-          Each dictionary member has a dual function: firstly, it denotes there
-          is a validation error the merchant would like the end user to
-          correct. Secondly, it provides the merchant with the opportunity to
-          describe to the end user what is wrong with a particular value (and
-          possibly how to correct the validation error). As such, the user
-          agent MAY present these validation errors to the end user. However, a
-          user agent MAY ignore dictionary members for validation errors that
-          the end user can't directly correct.
+          Each dictionary member has a dual function: firstly, it denotes that
+          a particular part of an address is suffering from a validation error.
+          Secondly, the string value allows the developer to describe the
+          validation error (and possibly how the end user can fix the error).
         </p>
         <p class="note">
-          Merchants need to be aware that users might not have control over
-          certain parts of an address. As such, they need to be mindful to not
-          to ask the user to fix things they might not have control over (e.g.,
-          <a>regionCodeError</a> and <a>languageCodeError</a>).
+          Developers need to be aware that users might not have the ability to
+          fix certain parts of an address. As such, they need to be mindful to
+          not to ask the user to fix things they might not have control over
+          (e.g., <a>languageCodeError</a>).
         </p>
         <dl>
           <dt>
             <dfn>addressLineError</dfn> member
           </dt>
           <dd>
-            The <a>address line</a> has a validation error.
+            Denotes that the <a>address line</a> has a validation error. In the
+            user agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">addressLine</a> attribute's value.
           </dd>
           <dt>
             <dfn>cityError</dfn> member
           </dt>
           <dd>
-            The <a>city</a> has a validation error.
+            Denotes that the <a>city</a> has a validation error. In the user
+            agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for="PaymentAddress">city</a>
+            attribute's value.
           </dd>
           <dt>
             <dfn>countryError</dfn> member
           </dt>
           <dd>
-            The <a>country</a> has a validation error.
+            Denotes that the <a>country</a> has a validation error. In the user
+            agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">country</a> attribute's value.
           </dd>
           <dt>
             <dfn>dependentLocalityError</dfn> member
           </dt>
           <dd>
-            The <a>dependent locality</a> has a validation error.
+            Denotes that the <a>dependent locality</a> has a validation error.
+            In the user agent's UI, this corresponds to input field that
+            provided the <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">dependentLocality</a> attribute's value.
           </dd>
           <dt>
             <dfn>languageCodeError</dfn> member
           </dt>
           <dd>
-            The <a>language code</a> has a validation error.
+            Denotes that the <a>language code</a> has a validation error. In
+            the user agent's UI, this corresponds to input field that provided
+            the <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">languageCode</a> attribute's value.
           </dd>
           <dt>
             <dfn>organizationError</dfn> member
           </dt>
           <dd>
-            The <a>organization</a> has a validation error.
+            Denotes that the <a>organization</a> has a validation error. In the
+            user agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">organization</a> attribute's value.
           </dd>
           <dt>
             <dfn>phoneError</dfn> member
           </dt>
           <dd>
-            The <a>phone number</a> has a validation error.
+            Denotes that the <a>phone number</a> has a validation error. In the
+            user agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for="PaymentAddress">phone</a>
+            attribute's value.
           </dd>
           <dt>
             <dfn>postalCodeError</dfn> member
           </dt>
           <dd>
-            The <a>postal code</a> has a validation error.
+            Denotes that the <a>postal code</a> has a validation error. In the
+            user agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">postalCode</a> attribute's value.
           </dd>
           <dt>
             <dfn>recipientError</dfn> member
           </dt>
           <dd>
-            The <a>recipient</a> has a validation error.
+            Denotes that the <a>recipient</a> has a validation error. In the
+            user agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">addressLine</a> attribute's value.
           </dd>
           <dt>
             <dfn>regionError</dfn> member
           </dt>
           <dd>
-            The <a>region</a> has a validation error.
+            Denotes that the <a>region</a> has a validation error. In the user
+            agent's UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">region</a> attribute's value.
           </dd>
           <dt>
             <dfn>regionCodeError</dfn> member
           </dt>
           <dd>
-            The region code representation of the <a>region</a> has a
-            validation error.
+            Denotes that the region code representation of the <a>region</a>
+            has a validation error. In the user agent's UI, this corresponds to
+            input field that provided the <a>PaymentAddress</a>'s
+            <a data-link-for="PaymentAddress">regionCode</a> attribute's value.
           </dd>
           <dt>
             <dfn>sortingCodeError</dfn> member
           </dt>
           <dd>
-            The <a>sorting code</a> has a validation error.
+            The <a>sorting code</a> has a validation error. In the user agent's
+            UI, this corresponds to input field that provided the
+            <a>PaymentAddress</a>'s <a data-link-for=
+            "PaymentAddress">sortingCode</a> attribute's value.
           </dd>
         </dl>
       </section>
@@ -4093,7 +4124,7 @@
                     <p>
                       Further, if the <a data-lt=
                       "PaymentDetailsUpdate.shippingAddressErrors">shippingAddressErrors</a>
-                      member is present, the user agent MAY display an error
+                      member is present, the user agent SHOULD display an error
                       specifically for each erroneous field of the shipping
                       address. This is done by matching each present member of
                       the <a>AddressErrorFields</a> to a corresponding input

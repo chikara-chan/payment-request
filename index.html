@@ -1757,8 +1757,7 @@
           dictionary PaymentDetailsUpdate : PaymentDetailsBase {
             DOMString error;
             PaymentItem total;
-            AddressErrors shippingAddressErrors;
-            PayerErrorFields payerErrors;
+            AddressErrorFields shippingAddressErrors;
           };
         </pre>
         <p>
@@ -1807,60 +1806,10 @@
           </dt>
           <dd>
             If the event target has an associated shipping address, the member
-            represents validation errors associated with that shipping address.
-          </dd>
-          <dt>
-            <dfn>payerErrors</dfn> member
-          </dt>
-          <dd>
-            If the event target has associated <a>payer details</a>, the member
-            represents validation errors associated with particular payer
-            details.
+            represents validation errors with that shipping address.
           </dd>
         </dl>
       </section>
-    </section>
-    <section data-dfn-for="PayerErrorFields" data-link-for="PayerErrorFields">
-      <h3>
-        <dfn>PayerErrorFields</dfn> dictionary
-      </h3>
-      <pre class="idl">
-        dictionary PayerErrorFields {
-          DOMString emailError;
-          DOMString nameError;
-          DOMString phoneError;
-        };
-      </pre>
-      <p>
-        The <a>PayerErrorFields</a> is used to represent validation errors with
-        one ore more <a>payer details</a>.
-      </p>
-      <dl>
-        <dt>
-          <dfn>emailError</dfn> member
-        </dt>
-        <dd>
-          Describes an input error with the user-provided email.
-        </dd>
-        <dt>
-          <dfn>nameError</dfn> member
-        </dt>
-        <dd>
-          Describes an input error with the user-provided name.
-        </dd>
-        <dt>
-          <dfn>phoneError</dfn> member
-        </dt>
-        <dd>
-          Describes an input user-provided phone number.
-        </dd>
-      </dl>
-      <pre class="example js">
-        const payerErrors = {
-          email: "The domain name is invalid",
-          phone: "Invalid format",
-        };
-      </pre>
     </section>
     <section data-dfn-for="PaymentDetailsModifier" data-link-for=
     "PaymentDetailsModifier">
@@ -2829,17 +2778,18 @@
           };
         </pre>
         <p>
-          The <a>AddressErrorFields</a> dictionary's members are used by
-          developers to one or more validation error with specific value of a
-          <a>physical address</a>. Each dictionary member has a dual function:
-          firstly, it denotes there is a validation error the merchant would
-          like the end user to correct. Secondly, it provides the merchant with
-          the opportunity to describe to the end user what is wrong with a
-          particular value. As such, the user agent SHOULD present these errors
-          to the end user. However, a user agent MAY ignore dictionary members
-          for validation errors that the end user can't directly correct.
+          The <a>AddressErrorFields</a> dictionary's members represent
+          validation errors with specific parts of a <a>physical address</a>.
+          Each dictionary member has a dual function: firstly, it denotes there
+          is a validation error the merchant would like the end user to
+          correct. Secondly, it provides the merchant with the opportunity to
+          describe to the end user what is wrong with a particular value (and
+          possibly how to correct the validation error). As such, the user
+          agent MAY present these validation errors to the end user. However, a
+          user agent MAY ignore dictionary members for validation errors that
+          the end user can't directly correct.
         </p>
-        <p>
+        <p class="note">
           Merchants need to be aware that users might not have control over
           certain parts of an address. As such, they need to be mindful to not
           to ask the user to fix things they might not have control over (e.g.,

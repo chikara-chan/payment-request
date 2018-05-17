@@ -495,28 +495,32 @@
           Fine-grained error reporting
         </h3>
         <p>
-          If there are validation errors with a shipping address, the site can
-          use <a data-link-for="PaymentDetailsUpdate">shippingAddressErrors</a>
-          to specifically signal which fields of the address are in violation,
-          and provide an error message for the browser to present to the
-          end-user.
+          A developer can use the <a data-link-for=
+          "PaymentDetailsUpdate">shippingAddressErrors</a> member of the
+          <a>PaymentDetailsUpdate</a> dictionary to indicate that there are
+          validation errors with specific attributes of a
+          <a>PaymentAddress</a>. The <a data-link-for=
+          "PaymentDetailsUpdate">shippingAddressErrors</a> member is a
+          <a>AddressErrorFields</a> dictionary, whose members specifically
+          demarcate the fields of a <a>physical address</a> that are erroneous
+          while also providing helpful error messages to be displayed to the
+          end user.
         </p>
         <pre class="example">
-        request.onshippingaddresschange = ev =&gt; {
-          ev.updateWith(
-            new Promise(() =&gt; {
-              const error = "Shipping Address is invalid.";
-              const shippingAddressErrors = {
-                cityError: "FarmVille is not a real place.",
-                postalCodeError: "Unknown postal code for your country.",
-              };
-              // Empty shippingOptions implies that we can't ship
-              // to this address.
-              const shippingOptions = [];
-              return { error, shippingAddressErrors, shippingOptions };
-            })
-          );
-        };
+          request.onshippingaddresschange = ev =&gt; {
+            ev.updateWith(validateAddress(request.shippingAddress));
+          };
+          function validateAddress(shippingAddress) {
+            const error = "Can't ship to this address.";
+            const shippingAddressErrors = {
+              cityError: "FarmVille is not a real place.",
+              postalCodeError: "Unknown postal code for your country.",
+            };
+            // Empty shippingOptions implies that we can't ship
+            // to this address.
+            const shippingOptions = [];
+            return { error, shippingAddressErrors, shippingOptions };
+          }
         </pre>
       </section>
       <section data-link-for="PaymentResponse">
@@ -1805,8 +1809,9 @@
             <dfn>shippingAddressErrors</dfn> member
           </dt>
           <dd>
-            If the event target has an associated shipping address, the member
-            represents validation errors with that shipping address.
+            Represents validation errors with the shipping address that is
+            associated with the <a data-cite="!dom#event-target">event
+            target</a>.
           </dd>
         </dl>
       </section>
